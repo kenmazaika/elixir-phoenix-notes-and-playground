@@ -3,7 +3,7 @@ defmodule PhoenixCrud.UserController do
   plug :action
   #use Jazz
 
-  #alias PhoenixCrud.Router
+  alias PhoenixCrud.Router
   #alias PhoenixCrud.User
 
   def index(conn, _params) do
@@ -28,8 +28,20 @@ defmodule PhoenixCrud.UserController do
   end
 
   def edit(conn, %{"id" => id}) do
-    user =  RepoQuery.find(id)
-    render conn, "edit", user: user
+    {id, _} = Integer.parse(id)
+    csrf = get_session(conn, :csrf_token)
 
+
+    user =  UserQuery.find(id)
+    render conn, "edit.html", user: user, csrf: csrf
+
+  end
+
+  def update(conn, %{"id" => id, "user" => params}) do
+    {id, _} = Integer.parse(id)
+    user = UserQuery.find(id)
+    user = %{user | content: params["content"]}
+    Repo.update(user)
+    json conn, %{location: PhoenixCrud.Router.Helpers.user_path(Endpoint, :show, user.id)}
   end
 end
