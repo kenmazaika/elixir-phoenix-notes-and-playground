@@ -1,0 +1,9 @@
+<users>
+  <%= for user <- @users do %>
+  <user>
+    <id><%= user.id %></id>
+    <name><%= user.content %></name>
+  </user>
+  <br />
+  <% end %>
+</users>
