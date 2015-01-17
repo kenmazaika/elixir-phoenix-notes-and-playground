@@ -10,12 +10,9 @@ defmodule PhoenixCrud.UserController do
     render conn, "index.html", users: Repo.all(PhoenixCrud.User)
   end
   def show(conn, %{"id" => id}) do
-    case UserQuery.find(id) do
-      user when is_map(user) ->
-        render conn, "show", user: user
-      [] ->
-        redirect conn, Router.page_path(page: "unauthorized")
-    end
+    {id, _} = Integer.parse(id)
+    user = UserQuery.find(id)
+    render conn, "show.html", user: user
   end
 
   def new(conn, _params) do
@@ -28,5 +25,11 @@ defmodule PhoenixCrud.UserController do
 
         user = Repo.insert(user)
         render conn, "show.html", user: user
+  end
+
+  def edit(conn, %{"id" => id}) do
+    user =  RepoQuery.find(id)
+    render conn, "edit", user: user
+
   end
 end

@@ -5,6 +5,7 @@ defmodule UserQuery do
     query = from r in PhoenixCrud.User,
     where: r.id == ^user_id,
     select: r
-    Repo.all(query)
+    [user] = Repo.all(query)
+    user
   end
 end
