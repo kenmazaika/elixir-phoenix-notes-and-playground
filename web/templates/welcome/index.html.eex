@@ -1,4 +1,6 @@
   <div class="jumbotron">
     <h2>Simple CRUD app using Phoenix and Elixir!</h2>
     <p class="lead">First try at getting a basic crud app up and working with Phoenix.</p>
+    <br />
+    <a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :index) %>" class="btn btn-primary btn-xl">Take me to the App!</a>
   </div>

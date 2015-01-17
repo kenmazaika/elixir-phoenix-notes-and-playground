@@ -3,12 +3,18 @@
   <user>
     <id><%= user.id %></id>
     <name><%= user.content %></name>
-    <a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :destroy, user.id) %>" data-method="DELETE" class="rest">delete</a>
+    <a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :destroy, user.id) %>" data-method="DELETE" class="rest">Destroy</a> |
+
+    <a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :edit, user.id) %>">Edit</a>
+
   </user>
   <br />
   <% end %>
 </users>
 
+
+<br />
+<a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :new) %>" class="btn btn-primary btn-xl">Make a New "User"</a>
 
 
 <script>
