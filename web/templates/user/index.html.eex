@@ -3,7 +3,24 @@
   <user>
     <id><%= user.id %></id>
     <name><%= user.content %></name>
+    <a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :destroy, user.id) %>" data-method="DELETE" class="rest">delete</a>
   </user>
   <br />
   <% end %>
 </users>
+
+
+
+<script>
+$(function() {
+  $(".rest").restfulizer({
+  });
+
+  $('form').submit(function(s) {
+    var input = $("<input>")
+    .attr("type", "hidden")
+    .attr("name", "csrf_token").val("<%= @csrf %>");
+    $(s.target).append($(input));
+  });
+});
+</script>

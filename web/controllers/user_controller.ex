@@ -1,13 +1,12 @@
 defmodule PhoenixCrud.UserController do
   use Phoenix.Controller
   plug :action
-  #use Jazz
 
   alias PhoenixCrud.Router
-  #alias PhoenixCrud.User
 
   def index(conn, _params) do
-    render conn, "index.html", users: Repo.all(PhoenixCrud.User)
+    csrf = get_session(conn, :csrf_token)
+    render conn, "index.html", users: Repo.all(PhoenixCrud.User), csrf: csrf
   end
   def show(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
@@ -22,19 +21,15 @@ defmodule PhoenixCrud.UserController do
 
   def create(conn, %{"user" => %{"content" => content}}) do
     user = %PhoenixCrud.User{content: content}
-
-        user = Repo.insert(user)
-        render conn, "show.html", user: user
+    user = Repo.insert(user)
+    render conn, "show.html", user: user
   end
 
   def edit(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
     csrf = get_session(conn, :csrf_token)
-
-
     user =  UserQuery.find(id)
     render conn, "edit.html", user: user, csrf: csrf
-
   end
 
   def update(conn, %{"id" => id, "user" => params}) do
@@ -43,5 +38,13 @@ defmodule PhoenixCrud.UserController do
     user = %{user | content: params["content"]}
     Repo.update(user)
     json conn, %{location: PhoenixCrud.Router.Helpers.user_path(Endpoint, :show, user.id)}
+  end
+
+  def destroy(conn, %{"id" => id}) do
+    {id, _} = Integer.parse(id)
+    user = UserQuery.find(id)
+    Repo.delete(user)
+    redirect conn, to: PhoenixCrud.Router.Helpers.user_path(Endpoint, :index)
+
   end
 end

@@ -1,2 +1,5 @@
 <h1>Show page</h1>
 <%= @user.content %>
+
+
+<a href="<%= PhoenixCrud.Router.Helpers.user_path(Endpoint, :index) %>">index</a>
