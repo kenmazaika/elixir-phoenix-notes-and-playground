@@ -5,28 +5,41 @@ defmodule PhoenixCrud.UserController do
   alias PhoenixCrud.Router
 
   def index(conn, _params) do
-    render conn, "index.html", users: Repo.all(PhoenixCrud.User)
+    conn
+    |> assign(:users, Repo.all(PhoenixCrud.User))
+    |> render("index.html")
   end
   def show(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
     user = UserQuery.find(id)
-    render conn, "show.html", user: user
+
+    conn
+    |> assign(:user, user)
+    |> render("show.html")
   end
 
   def new(conn, _params) do
-    render conn, "new.html"
+    conn
+    |> render("new.html")
   end
 
   def create(conn, %{"user" => %{"content" => content}}) do
     user = %PhoenixCrud.User{content: content}
     user = Repo.insert(user)
-    render conn, "show.html", user: user
+
+    conn
+    |> assign(:user, user)
+    |> render("show.html")
   end
 
   def edit(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
     user =  UserQuery.find(id)
-    render conn, "edit.html", user: user  end
+
+    conn
+    |> assign(:user, user)
+    |> render("edit.html")
+  end
 
   def update(conn, %{"id" => id, "user" => params}) do
     {id, _} = Integer.parse(id)
