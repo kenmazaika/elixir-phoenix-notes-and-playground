@@ -2,7 +2,7 @@ defmodule Repo do
   use Ecto.Repo, adapter: Ecto.Adapters.Postgres
 
   def conf do
-    parse_url "ecto://postgres:password@localhost/phoenix_crud2"
+    parse_url Application.get_env(:phoenix, :database)[:url]
   end
 
   def priv do

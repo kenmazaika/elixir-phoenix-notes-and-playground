@@ -31,3 +31,7 @@ config :logger, level: :info
 #
 #     config :phoenix_crud, PhoenixCrud.Endpoint, server: true
 #
+
+
+config :phoenix, :database,
+  url: System.get_env("DATABASE_URL")
