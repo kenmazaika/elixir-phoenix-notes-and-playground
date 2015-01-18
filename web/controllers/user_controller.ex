@@ -3,6 +3,7 @@ defmodule PhoenixCrud.UserController do
   plug :action
 
   alias PhoenixCrud.Router
+  import PhoenixCrud.Router.Helpers
 
   def index(conn, _params) do
     conn
@@ -46,14 +47,13 @@ defmodule PhoenixCrud.UserController do
     user = UserQuery.find(id)
     user = %{user | content: params["content"]}
     Repo.update(user)
-    json conn, %{location: PhoenixCrud.Router.Helpers.user_path(Endpoint, :show, user.id)}
+    json conn, %{location: user_path(conn, :show, user.id)}
   end
 
   def destroy(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
     user = UserQuery.find(id)
     Repo.delete(user)
-    redirect conn, to: PhoenixCrud.Router.Helpers.user_path(Endpoint, :index)
-
+    redirect conn, to: user_path(conn, :index)
   end
 end
