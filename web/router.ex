@@ -19,7 +19,7 @@ defmodule PhoenixCrud.Router do
 
     get "/", WelcomeController, :index, as: :root
     get "/pages/:page", PageController, :show, as: :page
-    resources "users", UserController
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

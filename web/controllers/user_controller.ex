@@ -5,8 +5,7 @@ defmodule PhoenixCrud.UserController do
   alias PhoenixCrud.Router
 
   def index(conn, _params) do
-    csrf = get_session(conn, :csrf_token)
-    render conn, "index.html", users: Repo.all(PhoenixCrud.User), csrf: csrf
+    render conn, "index.html", users: Repo.all(PhoenixCrud.User)
   end
   def show(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
@@ -15,8 +14,7 @@ defmodule PhoenixCrud.UserController do
   end
 
   def new(conn, _params) do
-    csrf = get_session(conn, :csrf_token)
-    render conn, "new.html", csrf: csrf
+    render conn, "new.html"
   end
 
   def create(conn, %{"user" => %{"content" => content}}) do
@@ -27,10 +25,8 @@ defmodule PhoenixCrud.UserController do
 
   def edit(conn, %{"id" => id}) do
     {id, _} = Integer.parse(id)
-    csrf = get_session(conn, :csrf_token)
     user =  UserQuery.find(id)
-    render conn, "edit.html", user: user, csrf: csrf
-  end
+    render conn, "edit.html", user: user  end
 
   def update(conn, %{"id" => id, "user" => params}) do
     {id, _} = Integer.parse(id)

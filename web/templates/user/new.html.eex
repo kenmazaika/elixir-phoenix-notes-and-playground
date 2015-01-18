@@ -1,6 +1,7 @@
   <h1>New User</h1>
   <form action="/users" method="post">
-    <input type="hidden" name="csrf_token" value=<%= @csrf%> />
+    <input type="hidden" name="csrf_token" value="<%= csrf_token(@conn) %>">
+    Add a line note
     <div class="form-group">
       <label for="user[content]">Content</label>
       <input type="text" name="user[content]" class="form-control" />
