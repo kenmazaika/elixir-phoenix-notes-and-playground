@@ -1,7 +1,7 @@
 <users>
   <%= for user <- @users do %>
   <user>
-    <id><%= user.id %></id>
+    <id><a href="<%= user_path(@conn, :show, user.id) %>"><%= user.id %></a></id>
     <name><%= user.content %></name>
     <a href="<%= user_path(@conn, :destroy, user.id) %>" data-method="DELETE" class="rest">Destroy</a> |
 
