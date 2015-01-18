@@ -1,4 +1,4 @@
-# [https://phoenix-heroku-demo-ken.herokuapp.com](https://phoenix-heroku-demo-ken.herokuapp.com)t
+# [https://phoenix-heroku-demo-ken.herokuapp.com](https://phoenix-heroku-demo-ken.herokuapp.com)
 
 To start your new Phoenix application:
 
