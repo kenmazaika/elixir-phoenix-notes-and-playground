@@ -11,9 +11,11 @@ use Mix.Config
 # Where those two env variables point to a file on
 # disk for the key and cert.
 
+# port = 5000
+{port, _ } =Integer.parse(System.get_env("PORT"))
 config :phoenix_crud, PhoenixCrud.Endpoint,
   url: [host: "example.com"],
-  http: [port: System.get_env("PORT")],
+  http: [port: port],
   secret_key_base: "gdvAykmlmy8c+s2SX4rp6yymghJYRmuRe2RkX67C93hSL5MyvJ7huf4pTohlmUZR"
 
 # Do not pring debug messages in production

@@ -9,7 +9,8 @@ use Mix.Config
 config :phoenix_crud, PhoenixCrud.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "gdvAykmlmy8c+s2SX4rp6yymghJYRmuRe2RkX67C93hSL5MyvJ7huf4pTohlmUZR",
-  debug_errors: false
+  debug_errors: false,
+  server: true
 
 # Configures Elixir's Logger
 config :logger, :console,
