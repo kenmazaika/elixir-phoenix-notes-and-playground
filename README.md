@@ -46,6 +46,8 @@ sudo apt-get install build-essential libncurses5-dev openssl libssl-dev fop xslt
 
 ```
 
+ln -s  erts-6.2/bin/run_erl bin/run_erl
+
 
 ```
 #> sudo apt-get install git
@@ -61,3 +63,18 @@ export PATH="$PATH:/root/elixir/bin"
 CREATE USER ken WITH PASSWORD 'yoloswaglol';
 CREATE DATABASE phoenix_crud2;
 GRANT ALL PRIVILEGES ON DATABASE phoenix_crud2 to ken;
+
+
+MIX CLEAN!
+
+
+
+Stop server, run migration start back up
+```
+MIX_ENV=prod mix ecto.migrate Repo
+```
+
+
+touch /etc/nginx/sites-available/phoenix_crud
+ln -s /etc/nginx/sites-available/phoenix_crud /etc/nginx/sites-enabled
+vim /etc/nginx/site-available/phoenix_crud
