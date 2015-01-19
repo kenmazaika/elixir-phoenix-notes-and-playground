@@ -1,5 +1,5 @@
 # [https://phoenix-heroku-demo-ken.herokuapp.com](https://phoenix-heroku-demo-ken.herokuapp.com)
-
+# [Digital Ocean Server on Metal](http://104.236.8.178/)
 To start your new Phoenix application:
 
 1. Install dependencies with `mix deps.get`
@@ -23,6 +23,14 @@ Now you can visit `localhost:4000` from your browser.
 * https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
 
 
+Key notes:
+* Elixir version was 1.1.0-dev, not 1.0.2, needed to checkout tag on github and then install elixir to keep versioning consistent
+* I needed to run the release command on the ubuntu server
+
+```
+MIX_ENV=prod /root/PhoenixTutorials/rel/phoenix_crud/bin/phoenix_crud start
+MIX_ENV=prod mix release
+mix release.clean
 ```
 useradd deploy
 passwd deploy
@@ -70,10 +78,11 @@ MIX CLEAN!
 
 
 Stop server, run migration start back up
+
+
 ```
 MIX_ENV=prod mix ecto.migrate Repo
 ```
-
 
 touch /etc/nginx/sites-available/phoenix_crud
 ln -s /etc/nginx/sites-available/phoenix_crud /etc/nginx/sites-enabled
