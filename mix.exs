@@ -25,7 +25,8 @@ defmodule PhoenixCrud.Mixfile do
       {:phoenix, github: "phoenixframework/phoenix"},
       {:cowboy, "~> 1.0.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 0.2.0"}
+      {:ecto, "~> 0.2.0"},
+      {:exrm, "~> 0.14.10"}
     ]
   end
 end
